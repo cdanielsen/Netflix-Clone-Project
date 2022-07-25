@@ -5,6 +5,7 @@ import AddIcon from '../../static/images/add.svg';
 import PlayIcon from '../../static/images/play-button.svg';
 
 function MovieDetails({ movie }) {
+  const runtimeDetail = movie.runtime || movie.episode_run_time;
   return (
     <div className="modal__container">
       <h1 className="modal__title">{movie.title || movie.name}</h1>
@@ -12,8 +13,8 @@ function MovieDetails({ movie }) {
         <span className="modal__rating">
           Rating: {movie.vote_average * 10}%{' '}
         </span>
-        Release date: {movie.release_date || movie.first_air_date} Runtime:{' '}
-        {movie.runtime || movie.episode_run_time}m
+        <span>Release date: {movie.release_date || movie.first_air_date}</span>
+        {runtimeDetail ? <span> Runtime: {runtimeDetail}m</span> : null}
       </p>
       <p className="modal__episode">
         {movie.number_of_episodes
