@@ -18,6 +18,7 @@ class Navbar extends Component {
     this.state = {
       scrolling: false,
       userInput: '',
+      isAvatarMenuOpen: false,
     };
     // use to debounce api call
     this.makeAipCall = _.debounce(this.makeAipCall, 1000);
@@ -68,6 +69,12 @@ class Navbar extends Component {
     this.setState({ userInput: '' });
   };
 
+  onAvatarClick = () => {
+    this.setState((prevState) => ({
+      isAvatarMenuOpen: !prevState.isAvatarMenuOpen,
+    }));
+  };
+
   onMyListClick = () => {
     window.alert(JSON.stringify([]));
   };
@@ -114,7 +121,10 @@ class Navbar extends Component {
           <div className="navigation__container-link pseudo-link">DVD</div>
           <BellLogo className="navigation__container--bellLogo" />
 
-          <DropdownContent />
+          <DropdownContent
+            isAvatarMenuOpen={this.state.isAvatarMenuOpen}
+            handleAvatarMenuClick={this.onAvatarClick}
+          />
           <DropdownArrow className="navigation__container--downArrow" />
         </ul>
       </nav>
