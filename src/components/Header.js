@@ -1,14 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
+import { addToList } from '../store/actions/index';
 
 import PlayLogo from '../static/images/play-button.svg';
 import AddLogo from '../static/images/add.svg';
 
-function Header({ movie }) {
+function Header({ movie, addToList }) {
   const backgroundStyle = {
     backgroundSize: 'cover',
     backgroundImage: `url(https://image.tmdb.org/t/p/original/${movie.backdrop_path})`,
     backgroundPosition: 'center',
+  };
+
+  const handleButtonClick = () => {
+    addToList(movie.id);
   };
 
   return (
@@ -22,7 +30,10 @@ function Header({ movie }) {
           <PlayLogo className="header__container-btnMyList-play" />
           Play
         </button>
-        <button className="header__container-btnMyList">
+        <button
+          className="header__container-btnMyList"
+          onClick={handleButtonClick}
+        >
           <AddLogo className="header__container-btnMyList-add" />
           My List
         </button>
@@ -34,9 +45,28 @@ function Header({ movie }) {
 }
 Header.propTypes = {
   movie: PropTypes.shape({
+    id: PropTypes.number,
     name: PropTypes.string,
     overview: PropTypes.string,
     backdrop_path: PropTypes.string,
   }).isRequired,
+  list: PropTypes.array.isRequired,
+  addToList: PropTypes.func.isRequired,
 };
-export default Header;
+
+const mapStateToProps = (state) => {
+  return {
+    list: state.list,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      addToList,
+    },
+    dispatch
+  );
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

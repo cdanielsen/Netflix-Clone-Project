@@ -10,6 +10,8 @@ export const FETCH_HORROR_MOVIES = 'FETCH_HORROR_MOVIES';
 export const FETCH_ROMANCE_MOVIES = 'FETCH_ROMANCE_MOVIES';
 export const FETCH_DOCUMENTARIES = 'FETCH_DOCUMENTARIES';
 
+export const ADD_TO_LIST = 'ADD_TO_LIST';
+
 export function fetchTrending() {
   const request = axios.get(
     `/trending/all/week?api_key=${process.env.API_KEY}&language=en-US`
@@ -95,5 +97,14 @@ export function fetchDocumentaries() {
   return {
     type: FETCH_DOCUMENTARIES,
     payload: request,
+  };
+}
+
+export function addToList(id) {
+  return {
+    type: ADD_TO_LIST,
+    payload: {
+      id,
+    },
   };
 }
