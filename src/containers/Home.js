@@ -23,9 +23,10 @@ class Home extends Component {
   };
 
   render() {
+    const openModalClass = this.state.toggleModal ? 'modal-open' : '';
     return (
       <>
-        <div className="main-content">
+        <div className={`main-content ${openModalClass}`}>
           <MainContent selectMovieHandler={this.selectMovieHandler} />
         </div>
         <Modal
