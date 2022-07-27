@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import AddIcon from '../../static/images/add.svg';
 import PlayIcon from '../../static/images/play-button.svg';
+import ListButton from '../ListButton';
 
 function MovieDetails({ movie }) {
   const runtimeDetail = movie.runtime || movie.episode_run_time;
@@ -27,10 +27,12 @@ function MovieDetails({ movie }) {
         <PlayIcon className="modal__btn--icon" />
         Play
       </button>
-      <button className="modal__btn">
-        <AddIcon className="modal__btn--icon" />
-        My List
-      </button>
+      <ListButton
+        movie={movie}
+        buttonClassName="modal__btn"
+        addClassName="modal__btn--icon"
+        removeClassName="modal__btn--icon"
+      />
     </div>
   );
 }
