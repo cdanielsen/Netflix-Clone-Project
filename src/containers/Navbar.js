@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import _ from 'lodash';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import axios from '../axios-movies';
 import SearchLogo from '../static/images/search-icon.svg';
@@ -76,7 +77,7 @@ class Navbar extends Component {
   };
 
   onMyListClick = () => {
-    window.alert(JSON.stringify([]));
+    window.alert(JSON.stringify(this.props.list));
   };
 
   render() {
@@ -136,6 +137,13 @@ Navbar.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
+  list: PropTypes.arrayOf(PropTypes.number),
 };
 
-export default withRouter(Navbar);
+const mapStateToProps = (state) => {
+  return {
+    list: state.list,
+  };
+};
+
+export default connect(mapStateToProps)(withRouter(Navbar));
