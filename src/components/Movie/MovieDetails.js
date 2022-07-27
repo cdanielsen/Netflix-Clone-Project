@@ -29,7 +29,7 @@ function MovieDetails({ movie }) {
       </button>
       <button className="modal__btn">
         <AddIcon className="modal__btn--icon" />
-        My Kist
+        My List
       </button>
     </div>
   );
