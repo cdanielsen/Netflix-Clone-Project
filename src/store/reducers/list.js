@@ -1,10 +1,15 @@
-import { ADD_TO_LIST } from '../actions';
+import { ADD_TO_LIST, REMOVE_FROM_LIST } from '../actions';
 
 export const ListReducer = (state = [], action) => {
-  console.log(action);
   switch (action.type) {
     case ADD_TO_LIST: {
-      return [...state, action.payload.id];
+      const { id } = action.payload;
+      return [...state, id];
+    }
+    case REMOVE_FROM_LIST: {
+      const { id } = action.payload;
+      const editedList = state.filter((currentId) => currentId !== id);
+      return editedList;
     }
     default:
       return state;

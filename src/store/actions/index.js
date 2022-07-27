@@ -11,6 +11,7 @@ export const FETCH_ROMANCE_MOVIES = 'FETCH_ROMANCE_MOVIES';
 export const FETCH_DOCUMENTARIES = 'FETCH_DOCUMENTARIES';
 
 export const ADD_TO_LIST = 'ADD_TO_LIST';
+export const REMOVE_FROM_LIST = 'REMOVE_FROM_LIST';
 
 export function fetchTrending() {
   const request = axios.get(
@@ -103,6 +104,15 @@ export function fetchDocumentaries() {
 export function addToList(id) {
   return {
     type: ADD_TO_LIST,
+    payload: {
+      id,
+    },
+  };
+}
+
+export function removeFromList(id) {
+  return {
+    type: REMOVE_FROM_LIST,
     payload: {
       id,
     },
